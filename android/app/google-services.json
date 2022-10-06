@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "378616425531",
+    "project_id": "balaji-3a7ae",
+    "storage_bucket": "balaji-3a7ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378616425531:android:19109f4c93cb0e23ba801e",
+        "android_client_info": {
+          "package_name": "com.balaji.admin_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378616425531-u6uq1u5ccmh788lr0tsv62afiajkoqk1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.balaji.admin_app",
+            "certificate_hash": "bde4c23b7d5d4a3dc396d10c0e743f392e0b98fa"
+          }
+        },
+        {
+          "client_id": "378616425531-r1ja1q4vnsce9bb8k9684ce2po4ik3cc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhr6dkQ5aZ-abEaLb_IvIagvVKbemBiRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378616425531-r1ja1q4vnsce9bb8k9684ce2po4ik3cc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
