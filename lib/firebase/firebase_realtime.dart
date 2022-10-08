@@ -131,6 +131,9 @@ class FirebaseRealTimeStorage {
       });
 
     });
+    orderList.sort((a,b){
+      return b.dateTime!.compareTo(a.dateTime!);
+    });
     hideLoader();
     goTo(className: OrderDetails(storeList: orderList));
   }
@@ -158,6 +161,7 @@ class FirebaseRealTimeStorage {
 
   Future adminToken()async{
    String? token =await FirebaseMessaging.instance.getToken();
+   myLog(label: "token", value: token.toString());
     fireBaseRealTime.ref(KeyConstants.adminToken).set({"token": token});
   }
 

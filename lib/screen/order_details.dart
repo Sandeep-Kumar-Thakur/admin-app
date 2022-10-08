@@ -1,3 +1,4 @@
+import 'package:admin_app/constants/key_contants.dart';
 import 'package:admin_app/model/store_cart_model.dart';
 import 'package:admin_app/screen/single_order_details.dart';
 import 'package:admin_app/utility/common_decoration.dart';
@@ -20,63 +21,79 @@ class OrderDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text("Order List"),
       ),
-      body: ListView.builder(
-          itemCount: storeList.length,
-          itemBuilder: (context, i) {
-            return InkWell(
-              onTap: (){
-                goTo(className: SingleOrderDetails(storeCartModel:storeList[i]));
-              },
-              child: Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  boxShadow: myShadow
-                ),
+      body: myPadding(
+        child: ListView.builder(
+            itemCount: storeList.length,
+            itemBuilder: (context, i) {
+              return InkWell(
+                onTap: (){
+                  goTo(className: SingleOrderDetails(storeCartModel:storeList[i]));
+                },
                 child: Row(
                   children: [
-                    Icon(Icons.list_alt_sharp),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${storeList[i].userModel?.name.toString()}",
-                          style: CommonDecoration.subHeaderDecoration,
-                        ),
-                        Text(
-                          "Rs. ${storeList[i].totalAmount}" ?? "",
-                          style: CommonDecoration.listItem,
-                        ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color:storeList[i].confirm==KeyConstants.cancelOrder? Colors.red.withOpacity(.2):storeList[i].confirm==KeyConstants.confirmOrder?Colors.green.withOpacity(.2):Colors.blue.withOpacity(.2),
 
-                      ],
+                          boxShadow: myShadow
+                      ),
+                      margin: EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.all(10),
+                      child: Text("${storeList.length-i}"),
                     ),
-                    Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Item Count : ${storeList[i].cartItem?.length}" ?? "",
-                          style: CommonDecoration.descriptionDecoration,
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color:storeList[i].confirm==KeyConstants.cancelOrder? Colors.red.withOpacity(.2):storeList[i].confirm==KeyConstants.confirmOrder?Colors.green.withOpacity(.2):Colors.blue.withOpacity(.2),
+
+                            boxShadow: myShadow
                         ),
-                        Text(
-                          "${DateFormat("dd, MMM yyyy ").add_jm().format(DateTime.parse(storeList[i].dateTime??""))}" ?? "",
-                          style: CommonDecoration.descriptionDecoration,
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${storeList[i].userModel?.name.toString()}",
+                                  style: CommonDecoration.subHeaderDecoration,
+                                ),
+                                Text(
+                                  "Rs. ${storeList[i].totalAmount}" ?? "",
+                                  style: CommonDecoration.listItem,
+                                ),
+
+                              ],
+                            ),
+                            Spacer(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Item Count : ${storeList[i].cartItem?.length}" ?? "",
+                                  style: CommonDecoration.descriptionDecoration,
+                                ),
+                                Text(
+                                  "${DateFormat("dd, MMM yyyy ").add_jm().format(DateTime.parse(storeList[i].dateTime??""))}" ?? "",
+                                  style: CommonDecoration.descriptionDecoration,
+                                ),
+                                Text(
+                                  "Status : ${storeList[i].confirm}" ?? "",
+                                  style: CommonDecoration.descriptionDecoration,
+                                ),
+                              ],
+                            ),
+                            Icon(Icons.arrow_right_sharp)
+                          ],
                         ),
-                        Text(
-                          "Status : ${storeList[i].confirm}" ?? "",
-                          style: CommonDecoration.descriptionDecoration,
-                        ),
-                      ],
+                      ),
                     ),
-                    Icon(Icons.arrow_right_sharp)
                   ],
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }
