@@ -5,6 +5,7 @@ import 'package:admin_app/firebase/firebase_realtime.dart';
 import 'package:admin_app/notification_service.dart';
 import 'package:admin_app/controller/user_controller.dart';
 import 'package:admin_app/model/category_model.dart';
+import 'package:admin_app/screen/add_banner.dart';
 import 'package:admin_app/utility/helper_widgets.dart';
 import 'package:admin_app/utility/my_button.dart';
 import 'package:admin_app/utility/navigator_helper.dart';
@@ -107,6 +108,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   FirebaseRealTimeStorage().getOrder();
                 },
                 child: MyRoundButton(text: "Order Details", bgColor: Colors.blue)),
+            smallSpace(),
+
+            InkWell(
+                onTap: (){
+                  FirebaseRealTimeStorage().getAllBanner();
+                // FirebaseRealTimeStorage().getAllCategoryList(navigate: false).then((value) {
+                //   goTo(className: AddBanner());
+                // });
+                },
+                child: MyRoundButton(text: "Banner", bgColor: Colors.blue)),
           ],
         ),
       ),

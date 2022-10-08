@@ -31,6 +31,7 @@ class ProductDetailsModel {
    String? productImage2;
    List<QuantityAndPrice>? quantityAndPrice;
    String? productGrade;
+   bool? selected;
    String? productDescription;
    String? productName;
 

@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:admin_app/constants/key_contants.dart';
 import 'package:admin_app/controller/state_controller.dart';
+import 'package:admin_app/model/banner_model.dart';
 import 'package:http/http.dart'as http;
 
 import 'package:admin_app/controller/user_controller.dart';
@@ -19,10 +20,54 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../screen/banner_list.dart';
 import '../screen/category_list_screen.dart';
 
 class FirebaseRealTimeStorage {
   final fireBaseRealTime = FirebaseDatabase.instance;
+
+  ///--------deleteBanner---------
+
+  Future deleteBanner({required String key})async{
+    showLoader();
+    fireBaseRealTime.ref(KeyConstants.banner).child(key).remove();
+    hideLoader();
+    hideLoader();
+  }
+
+  ///-------------getBanner-------------------
+
+  Future getAllBanner()async{
+    showLoader();
+    List<BannerModel> bannerList = [];
+   var data = await fireBaseRealTime.ref(KeyConstants.banner).get();
+   if(data.value==null){
+     hideLoader();
+     goTo(className: BannerList(bannerList: [],));
+     return;
+   }
+   Map tempData = jsonDecode(jsonEncode(data.value));
+   tempData.forEach((key, value) {
+     BannerModel bannerModel = BannerModel.fromJson(value);
+     bannerList.add(bannerModel);
+   });
+   hideLoader();
+   goTo(className: BannerList(bannerList: bannerList,));
+  }
+
+///----------------------add Banner-------------------
+
+  Future addBanner({required BannerModel bannerModel})async{
+    showLoader();
+    fireBaseRealTime.ref(KeyConstants.banner).child(bannerModel.name??"").update(bannerModel.toJson()).then((value) {
+      hideLoader();
+      hideLoader();
+      hideLoader();
+    }).onError((error, stackTrace) {
+      hideLoader();
+      showMessage(msg: "Something went wrong");
+    });
+  }
 
 
   ///--------------change order status-----------
