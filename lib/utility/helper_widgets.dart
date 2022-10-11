@@ -25,7 +25,6 @@ showMessage({required String msg}){
     margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
     borderRadius: 10,
     title: "Bala Ji",
-    icon: Icon(Icons.check),
     snackPosition: SnackPosition.TOP,
     backgroundColor: Colors.blue,
     duration: Duration(seconds: 3),

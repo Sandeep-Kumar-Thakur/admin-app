@@ -26,6 +26,14 @@ import '../screen/category_list_screen.dart';
 class FirebaseRealTimeStorage {
   final fireBaseRealTime = FirebaseDatabase.instance;
 
+  ///----------------------------
+  Future passwordCheck()async{
+    showLoader();
+    DataSnapshot password = await fireBaseRealTime.ref(KeyConstants.adminPassword).get();
+    hideLoader();
+    return password.value.toString();
+  }
+
   ///--------deleteBanner---------
 
   Future deleteBanner({required String key})async{

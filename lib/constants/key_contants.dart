@@ -5,6 +5,7 @@ class KeyConstants{
   static const userCarts = "userCarts";
   static const orderReceived = "OrderReceived";
   static const banner = "Banner";
+  static const adminPassword = "adminPassword";
 
   static const uid = "uid";
   static const fcmToken = "fcmToken";

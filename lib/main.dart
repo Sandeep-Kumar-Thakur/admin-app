@@ -8,6 +8,7 @@ import 'package:admin_app/model/category_model.dart';
 import 'package:admin_app/screen/add_banner.dart';
 import 'package:admin_app/utility/helper_widgets.dart';
 import 'package:admin_app/utility/my_button.dart';
+import 'package:admin_app/utility/my_text_field.dart';
 import 'package:admin_app/utility/navigator_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -52,10 +53,42 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:  AdminPassword(),
     );
   }
 }
+
+class AdminPassword extends StatelessWidget {
+    AdminPassword({Key? key}) : super(key: key);
+ final password = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: myPadding(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MyTextFieldWithPreFix(textEditController: password, filled: false, textInputType: TextInputType.number, label: "Admin PIN", validate: true),
+           largeSpace(),
+            InkWell(
+                onTap: (){
+                  FirebaseRealTimeStorage().passwordCheck().then((value) {
+                    if(value==password.value.text){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyHomePage(title: "d")));
+                    }else{
+                      showMessage(msg: "Wrong Password");
+                    }
+                  });
+                },
+                child: MyRoundButton(text: "Login", bgColor: Colors.blue))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
