@@ -26,12 +26,27 @@ import '../screen/category_list_screen.dart';
 class FirebaseRealTimeStorage {
   final fireBaseRealTime = FirebaseDatabase.instance;
 
-  ///----------------------------
+  ///--------------check password--------------
   Future passwordCheck()async{
     showLoader();
     DataSnapshot password = await fireBaseRealTime.ref(KeyConstants.adminPassword).get();
     hideLoader();
     return password.value.toString();
+  }
+  ///-------------hot items--------------
+  
+  Future addHotItems(BannerModel bannerModel)async{
+    showLoader();
+    await fireBaseRealTime.ref(KeyConstants.hotItems).set(bannerModel.toJson());
+    hideLoader();
+  }
+
+  Future<BannerModel> getHotItems()async{
+    showLoader();
+    DataSnapshot dataSnapshot = await fireBaseRealTime.ref(KeyConstants.hotItems).get();
+    BannerModel bannerModel = BannerModel.fromJson(jsonDecode(jsonEncode(dataSnapshot.value)));
+    hideLoader();
+    return bannerModel;
   }
 
   ///--------deleteBanner---------

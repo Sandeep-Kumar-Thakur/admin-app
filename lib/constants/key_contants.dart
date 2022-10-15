@@ -6,6 +6,7 @@ class KeyConstants{
   static const orderReceived = "OrderReceived";
   static const banner = "Banner";
   static const adminPassword = "adminPassword";
+  static const hotItems = "hotItems";
 
   static const uid = "uid";
   static const fcmToken = "fcmToken";

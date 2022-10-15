@@ -6,6 +6,7 @@ import 'package:admin_app/notification_service.dart';
 import 'package:admin_app/controller/user_controller.dart';
 import 'package:admin_app/model/category_model.dart';
 import 'package:admin_app/screen/add_banner.dart';
+import 'package:admin_app/screen/hot_items_screen.dart';
 import 'package:admin_app/utility/helper_widgets.dart';
 import 'package:admin_app/utility/my_button.dart';
 import 'package:admin_app/utility/my_text_field.dart';
@@ -13,12 +14,17 @@ import 'package:admin_app/utility/navigator_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   PushNotificationService().setupInteractedMessage();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
   // runZonedGuarded(()async {
   //   WidgetsFlutterBinding.ensureInitialized();
@@ -151,6 +157,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 // });
                 },
                 child: MyRoundButton(text: "Banner", bgColor: Colors.blue)),
+            smallSpace(),
+            InkWell(
+                onTap: (){
+                  FirebaseRealTimeStorage().getHotItems().then((selected) {
+                    FirebaseRealTimeStorage().getAllCategoryList(navigate: false).then((value){
+                      goTo(className: HotItemsScreen(bannerModel: selected,));
+                    });
+                  });
+
+                  },
+                child: MyRoundButton(text: "Hot Items", bgColor: Colors.blue)),
           ],
         ),
       ),

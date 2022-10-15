@@ -34,132 +34,138 @@ class CategoryList extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: myPadding(
-        child: Column(
-          children: [
-            commonHeader("Category List"),
-            Obx(() {
-              return UserController()
-                      .stateController
-                      .categoryList
-                      .length
-                      .isEqual(0)
-                  ? Text("No Data Found")
-                  : ListView.builder(
-                      shrinkWrap: true,
-                      itemCount:
-                          UserController().stateController.categoryList.length,
-                      itemBuilder: (context, i) {
-                        return Container(
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(bottom: 15),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.white,
-                              boxShadow: myShadow),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                        height: 50,
-                                        width: 50,
-                                        child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            child: myImage(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              commonHeader("Category List"),
+              Obx(() {
+                return UserController()
+                        .stateController
+                        .categoryList
+                        .length
+                        .isEqual(0)
+                    ? Text("No Data Found")
+                    : ListView.builder(
+                  padding: EdgeInsets.only(bottom: 100),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount:
+                            UserController().stateController.categoryList.length,
+                        itemBuilder: (context, i) {
+                          return Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(bottom: 15),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                                boxShadow: myShadow),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                          height: 50,
+                                          width: 50,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              child: myImage(
 
-                                              source: UserController()
+                                                source: UserController()
+                                                    .stateController
+                                                    .categoryList[i]
+                                                    .image,
+                                               fromUrl: true
+                                              ))),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          UserController()
                                                   .stateController
                                                   .categoryList[i]
-                                                  .image,
-                                             fromUrl: true
-                                            ))),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      UserController()
-                                              .stateController
-                                              .categoryList[i]
-                                              .name ??
-                                          "",
-                                      style: CommonDecoration.listItem,
-                                    ),
-                                  ],
+                                                  .name ??
+                                              "",
+                                          style: CommonDecoration.listItem,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: InkWell(
-                                            onTap: () {
-                                              FirebaseRealTimeStorage()
-                                                  .deleteCategory(
-                                                      id: UserController()
-                                                          .stateController
-                                                          .categoryList[i]
-                                                          .name);
-                                            },
-                                            child: optionButton(Icon(
-                                              Icons.delete,
-                                              color: Colors.white,
-                                            )))),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Expanded(
-                                      child: InkWell(
-                                          onTap: () {
-                                            goTo(
-                                                className: AddCategoryScreen(
-                                              filled: true,
-                                              categoryModel: UserController()
-                                                  .stateController
-                                                  .categoryList[i],
-                                            ));
-                                          },
-                                          child: optionButton(Icon(
-                                            Icons.edit,
-                                            color: Colors.white,
-                                          ))),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Expanded(
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: InkWell(
+                                              onTap: () {
+                                                FirebaseRealTimeStorage()
+                                                    .deleteCategory(
+                                                        id: UserController()
+                                                            .stateController
+                                                            .categoryList[i]
+                                                            .name);
+                                              },
+                                              child: optionButton(Icon(
+                                                Icons.delete,
+                                                color: Colors.white,
+                                              )))),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Expanded(
                                         child: InkWell(
                                             onTap: () {
                                               goTo(
-                                                  className: ItemsListScreen(
-                                                    index: i,
-                                                categoryName: UserController()
+                                                  className: AddCategoryScreen(
+                                                filled: true,
+                                                categoryModel: UserController()
                                                     .stateController
-                                                    .categoryList[i]
-                                                    .name,
+                                                    .categoryList[i],
                                               ));
-                                              // goTo(
-                                              //     className: AddProductScreen(
-                                              //         categoryName:
-                                              //             UserController()
-                                              //                 .stateController
-                                              //                 .categoryList[i]
-                                              //                 .name));
                                             },
                                             child: optionButton(Icon(
-                                              Icons.add,
+                                              Icons.edit,
                                               color: Colors.white,
-                                            )))),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      });
-            }),
-          ],
+                                            ))),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Expanded(
+                                          child: InkWell(
+                                              onTap: () {
+                                                goTo(
+                                                    className: ItemsListScreen(
+                                                      index: i,
+                                                  categoryName: UserController()
+                                                      .stateController
+                                                      .categoryList[i]
+                                                      .name,
+                                                ));
+                                                // goTo(
+                                                //     className: AddProductScreen(
+                                                //         categoryName:
+                                                //             UserController()
+                                                //                 .stateController
+                                                //                 .categoryList[i]
+                                                //                 .name));
+                                              },
+                                              child: optionButton(Icon(
+                                                Icons.add,
+                                                color: Colors.white,
+                                              )))),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        });
+              }),
+            ],
+          ),
         ),
       ),
     );
