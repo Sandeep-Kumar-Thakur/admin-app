@@ -37,6 +37,8 @@ class SingleOrderDetails extends StatelessWidget {
             ),
             smallSpace(),
             Expanded(child: ListView.builder(
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
                 itemCount: storeCartModel.cartItem?.length??0,
                 itemBuilder: (context,i){
               return Padding(

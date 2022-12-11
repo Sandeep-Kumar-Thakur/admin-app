@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:admin_app/firebase/firebase_realtime.dart';
+import 'package:admin_app/generated/assets.dart';
 import 'package:admin_app/notification_service.dart';
 import 'package:admin_app/controller/user_controller.dart';
 import 'package:admin_app/model/category_model.dart';
@@ -74,6 +75,18 @@ class AdminPassword extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(60)
+              ),
+                child:Icon(Icons.person,size: 80,color: Colors.white,)),
+            SizedBox(height: 10,),
+            Text("BALA JI ADMIN",style: TextStyle(
+              fontSize: 20
+            ),),
+            SizedBox(height: 20,),
             MyTextFieldWithPreFix(textEditController: password, filled: false, textInputType: TextInputType.number, label: "Admin PIN", validate: true),
            largeSpace(),
             InkWell(
@@ -116,6 +129,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  List title = [
+    "Order List",
+    "Category List",
+    "Banner Details",
+    "Hot Items List",
+    "User List"
+  ];
+
+  List myAssets=[
+    Assets.imagesOrder,
+    Assets.imagesMenu,
+    Assets.imagesAdvertisement,
+    Assets.imagesHotDeal,
+    Assets.imagesContactList
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,44 +159,59 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             smallSpace(),
-              InkWell(
+              GridView.builder(
+                shrinkWrap: true,
+                itemCount: title.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5
+              ),
+                itemBuilder: (context,i)=>InkWell(
                   onTap: (){
-                    FirebaseRealTimeStorage().getAllCategoryList();
-                  },
-                  child: MyRoundButton(text: "Category List", bgColor: Colors.blue)),
-            smallSpace(),
-            InkWell(
-                onTap: (){
-                  FirebaseRealTimeStorage().userDetails();
-                },
-                child: MyRoundButton(text: "User List", bgColor: Colors.blue)),
-            smallSpace(),
-            InkWell(
-                onTap: (){
-                  FirebaseRealTimeStorage().getOrder();
-                },
-                child: MyRoundButton(text: "Order Details", bgColor: Colors.blue)),
-            smallSpace(),
+                    switch(i){
+                      case 0:
+                        FirebaseRealTimeStorage().getOrder();
+                        break;
+                      case 1:
+                        FirebaseRealTimeStorage().getAllCategoryList();
+                        break;
+                      case 2:
+                        FirebaseRealTimeStorage().getAllBanner();
+                        break;
+                      case 3:
+                        FirebaseRealTimeStorage().getHotItems().then((selected) {
+                          FirebaseRealTimeStorage().getAllCategoryList(navigate: false).then((value){
+                            goTo(className: HotItemsScreen(bannerModel: selected,));
+                          });
+                        });
 
-            InkWell(
-                onTap: (){
-                  FirebaseRealTimeStorage().getAllBanner();
-                // FirebaseRealTimeStorage().getAllCategoryList(navigate: false).then((value) {
-                //   goTo(className: AddBanner());
-                // });
-                },
-                child: MyRoundButton(text: "Banner", bgColor: Colors.blue)),
-            smallSpace(),
-            InkWell(
-                onTap: (){
-                  FirebaseRealTimeStorage().getHotItems().then((selected) {
-                    FirebaseRealTimeStorage().getAllCategoryList(navigate: false).then((value){
-                      goTo(className: HotItemsScreen(bannerModel: selected,));
-                    });
-                  });
-
+                        break;
+                      case 4:
+                        FirebaseRealTimeStorage().userDetails();
+                        break;
+                    }
                   },
-                child: MyRoundButton(text: "Hot Items", bgColor: Colors.blue)),
+                  child: Stack(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Text(title[i],style: TextStyle(color:Colors.white,fontSize: 24),),
+                      ),
+                      Positioned(
+                          bottom: 5,
+                          right: 5,
+                          child: Image.asset(myAssets[i],height: 60,))
+                    ],
+                  ),
+                ),
+              ),
+
           ],
         ),
       ),

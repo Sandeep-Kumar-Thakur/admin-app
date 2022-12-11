@@ -29,7 +29,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
    Future pickImage() async {
      try {
        final image = await ImagePicker(
-       ).pickImage(source: ImageSource.gallery,imageQuality: 50);
+       ).pickImage(source: ImageSource.gallery,imageQuality: 10);
        if(image == null) return;
        final imageTemp = File(image.path);
        imageFormUrl = false;

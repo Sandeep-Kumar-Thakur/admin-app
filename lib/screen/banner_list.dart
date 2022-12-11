@@ -34,6 +34,8 @@ class _BannerListState extends State<BannerList> {
       ),
       body: myPadding(
         child: ListView.builder(
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
             itemCount: widget.bannerList.length,
             itemBuilder: (context, i) {
               return Container(

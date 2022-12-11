@@ -83,15 +83,19 @@ class _HotItemsScreenState extends State<HotItemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Hot Items"),
+      ),
       body: myPadding(
         child: SingleChildScrollView(
           child: Form(
             key: _globalKey,
             child: Column(
               children: [
-                commonHeader("Hot Items"),
 
                 ListView.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
                     itemCount: selectedProduct.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),

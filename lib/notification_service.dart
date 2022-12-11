@@ -1,4 +1,5 @@
 
+import 'package:admin_app/utility/helper_widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
@@ -51,6 +52,7 @@ class PushNotificationService {
   Future<void> setupInteractedMessage() async {
     await Firebase.initializeApp();
     String? token = await FirebaseMessaging.instance.getToken();
+    myLog(label: "token", value: token.toString());
 // Get any messages which caused the application to open from a terminated state.
     // If you want to handle a notification click when the app is terminated, you can use `getInitialMessage`
     // to get the initial message, and depending in the remoteMessage, you can decide to handle the click
@@ -104,11 +106,9 @@ class PushNotificationService {
           case NotificationResponseType.selectedNotification:
             break;
           case NotificationResponseType.selectedNotificationAction:
-
             break;
         }
-
-      },
+        },
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
       // onSelectNotification: (message) async {
       // //  consolePrint(label: "Foreground On Tap " + message!);
@@ -136,6 +136,10 @@ class PushNotificationService {
               channel.name,
               icon: android.smallIcon,
               playSound: true,
+              actions: [
+                AndroidNotificationAction("yes","yes"),
+                AndroidNotificationAction("No","No"),
+              ]
             ),
           ),
         );

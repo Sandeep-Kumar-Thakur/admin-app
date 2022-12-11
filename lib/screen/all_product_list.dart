@@ -29,6 +29,8 @@ class _AllProductListState extends State<AllProductList> {
       body:myPadding(
         child: ListView.builder(
           padding: EdgeInsets.only(bottom: 100),
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
             itemCount: widget.productListAll.length,
             itemBuilder: (context,i){
           return  InkWell(

@@ -17,6 +17,8 @@ class UserList extends StatelessWidget {
         title: Text("User Details"),
       ),
       body: ListView.builder(
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
           itemCount: userList.length,
           itemBuilder: (context, i) {
             return Container(

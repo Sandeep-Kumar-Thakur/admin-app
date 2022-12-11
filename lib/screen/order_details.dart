@@ -23,6 +23,8 @@ class OrderDetails extends StatelessWidget {
       ),
       body: myPadding(
         child: ListView.builder(
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
             itemCount: storeList.length,
             itemBuilder: (context, i) {
               return InkWell(
@@ -52,21 +54,22 @@ class OrderDetails extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${storeList[i].userModel?.name.toString()}",
-                                  style: CommonDecoration.subHeaderDecoration,
-                                ),
-                                Text(
-                                  "Rs. ${storeList[i].totalAmount}" ?? "",
-                                  style: CommonDecoration.listItem,
-                                ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${storeList[i].userModel?.name.toString()}",
+                                    style: CommonDecoration.subHeaderDecoration,
+                                  ),
+                                  Text(
+                                    "Rs. ${storeList[i].totalAmount}" ?? "",
+                                    style: CommonDecoration.listItem,
+                                  ),
 
-                              ],
+                                ],
+                              ),
                             ),
-                            Spacer(),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [

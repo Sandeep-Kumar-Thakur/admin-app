@@ -8,10 +8,8 @@ import 'package:admin_app/utility/common_decoration.dart';
 import 'package:admin_app/utility/helper_widgets.dart';
 import 'package:admin_app/utility/my_button.dart';
 import 'package:admin_app/utility/my_text_field.dart';
-import 'package:admin_app/utility/navigator_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../controller/user_controller.dart';
@@ -50,7 +48,7 @@ class _AddBannerState extends State<AddBanner> {
   Future pickImage() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 30);
+          .pickImage(source: ImageSource.gallery, imageQuality: 10);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl = false;
@@ -138,6 +136,8 @@ class _AddBannerState extends State<AddBanner> {
                 ListView.builder(
                     itemCount: selectedProduct.length,
                     shrinkWrap: true,
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context,i){
                       return  Container(

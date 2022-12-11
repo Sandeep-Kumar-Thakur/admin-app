@@ -51,6 +51,8 @@ class ItemsListScreen extends StatelessWidget {
               return data.productList!.length.isEqual(0)
                   ? Text("No Data Found")
                   : ListView.builder(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: data.productList!.length,
@@ -82,6 +84,8 @@ class ItemsListScreen extends StatelessWidget {
                             ),
                             children: [
                               ListView.builder(
+                                  addAutomaticKeepAlives: false,
+                                  addRepaintBoundaries: false,
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: data

@@ -48,7 +48,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future pickImage() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 30);
+          .pickImage(source: ImageSource.gallery, imageQuality: 10);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl = false;
@@ -61,7 +61,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future pickImage2() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 30);
+          .pickImage(source: ImageSource.gallery, imageQuality: 10);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl2 = false;
@@ -332,6 +332,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   slapList() {
     return ListView.builder(
         shrinkWrap: true,
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
         physics: NeverScrollableScrollPhysics(),
         itemCount: productModel.quantityAndPrice!.length,
         itemBuilder: (context, i) {

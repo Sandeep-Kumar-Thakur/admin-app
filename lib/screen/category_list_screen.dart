@@ -46,8 +46,11 @@ class CategoryList extends StatelessWidget {
                         .isEqual(0)
                     ? Text("No Data Found")
                     : ListView.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
                   padding: EdgeInsets.only(bottom: 100),
                         shrinkWrap: true,
+
                         physics: NeverScrollableScrollPhysics(),
                         itemCount:
                             UserController().stateController.categoryList.length,
