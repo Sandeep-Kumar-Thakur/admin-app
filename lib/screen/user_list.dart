@@ -55,7 +55,7 @@ class UserList extends StatelessWidget {
                   Text("ZipCode : ${userList[i].pinCode}"??"",style: CommonDecoration.listItem,),
                   smallSpace(),
 
-                  Text("Email : ${userList[i].gmail}"??"",style: CommonDecoration.listItem,),
+                  Text("GST No : ${userList[i].gmail}"??"",style: CommonDecoration.listItem,),
                   smallSpace(),
 
                   Text("Alternative Number : ${userList[i].location}"??"",style: CommonDecoration.listItem,),

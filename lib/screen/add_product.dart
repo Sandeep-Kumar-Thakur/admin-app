@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:admin_app/constants/key_contants.dart';
 import 'package:admin_app/model/category_model.dart' as categoryModel;
 import 'package:admin_app/model/product_model.dart';
 import 'package:admin_app/utility/common_decoration.dart';
@@ -48,7 +49,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future pickImage() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 10);
+          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl = false;
@@ -61,7 +62,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future pickImage2() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 10);
+          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl2 = false;

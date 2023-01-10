@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../constants/key_contants.dart';
 import '../controller/user_controller.dart';
 import '../firebase/firebase_realtime.dart';
 import '../firebase/firebase_storage.dart';
@@ -48,7 +49,7 @@ class _AddBannerState extends State<AddBanner> {
   Future pickImage() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 10);
+          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl = false;

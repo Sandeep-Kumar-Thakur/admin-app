@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../constants/key_contants.dart';
+
 class AddCategoryScreen extends StatefulWidget {
   bool? filled;
   CategoryModel? categoryModel;
@@ -29,7 +31,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
    Future pickImage() async {
      try {
        final image = await ImagePicker(
-       ).pickImage(source: ImageSource.gallery,imageQuality: 10);
+       ).pickImage(source: ImageSource.gallery,imageQuality: KeyConstants.imageQuality);
        if(image == null) return;
        final imageTemp = File(image.path);
        imageFormUrl = false;

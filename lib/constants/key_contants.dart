@@ -16,4 +16,5 @@ class KeyConstants{
   static const pendingOrder = "Pending Order";
   static const confirmOrder = "Order Confirmed";
   static const cancelOrder = "Order Canceled";
+  static const imageQuality = 5;
 }
