@@ -49,7 +49,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future pickImage() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
+          .getImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl = false;
@@ -62,7 +62,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future pickImage2() async {
     try {
       final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
+          .getImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl2 = false;
