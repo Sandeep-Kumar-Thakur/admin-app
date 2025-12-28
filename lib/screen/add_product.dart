@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../firebase/firebase_realtime.dart';
 import '../firebase/firebase_storage.dart';
@@ -48,8 +49,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   Future pickImage() async {
     try {
+      myLog(label: 'sad', value: "sad");
       final image = await ImagePicker()
-          .getImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
+          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl = false;
@@ -61,8 +63,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   Future pickImage2() async {
     try {
+      myLog(label: 'sad', value: "sad");
       final image = await ImagePicker()
-          .getImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
+          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl2 = false;

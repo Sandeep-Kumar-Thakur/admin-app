@@ -49,7 +49,7 @@ class _AddBannerState extends State<AddBanner> {
   Future pickImage() async {
     try {
       final image = await ImagePicker()
-          .getImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
+          .pickImage(source: ImageSource.gallery, imageQuality: KeyConstants.imageQuality);
       if (image == null) return;
       final imageTemp = File(image.path);
       imageFromUrl = false;

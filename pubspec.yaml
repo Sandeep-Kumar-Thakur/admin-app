@@ -38,12 +38,13 @@ dependencies:
   firebase_database:
   firebase_storage:
   get:
-  image_picker:
+  image_picker: ^1.1.2
   firebase_messaging:
   flutter_local_notifications:
   intl:
   http:
   flutter_launcher_icons:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:
